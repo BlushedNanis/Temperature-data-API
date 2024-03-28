@@ -50,6 +50,18 @@ def station_and_month(station, year, month):
     month_df["    DATE"] = pd.to_datetime(month_df["    DATE"])
     result_df = month_df[["    DATE", "   TG"]].to_dict('records')
     return result_df
+
+
+@app.route("/api/v1/<station>/<year>")
+def station_and_year(station, year):
+    date = str(year)
+    filepath = "data\TG_STAID" + str(station).zfill(6) + ".txt"
+    df = pd.read_csv(filepath, skiprows=20)
+    df["    DATE"] = df["    DATE"].astype(str)
+    year_df = df[df["    DATE"].str.startswith(date)]
+    year_df["    DATE"] = pd.to_datetime(year_df["    DATE"])
+    result_df = year_df[["    DATE", "   TG"]].to_dict('records')
+    return result_df
         
 
 if __name__ == "__main__":
