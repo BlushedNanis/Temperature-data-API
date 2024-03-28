@@ -40,5 +40,17 @@ def station_and_date(station, year, month, day):
         return "Please, provide a valid station."
 
 
+@app.route("/api/v1/<station>/<year>/<month>")
+def station_and_month(station, year, month):
+    date = str(year) + str(month)
+    filepath = "data\TG_STAID" + str(station).zfill(6) + ".txt"
+    df = pd.read_csv(filepath, skiprows=20)
+    df["    DATE"] = df["    DATE"].astype(str)
+    month_df = df[df["    DATE"].str.startswith(date)]
+    month_df["    DATE"] = pd.to_datetime(month_df["    DATE"])
+    result_df = month_df[["    DATE", "   TG"]].to_dict('records')
+    return result_df
+        
+
 if __name__ == "__main__":
     app.run(debug=True)
