@@ -23,9 +23,10 @@ def only_station(station):
     result_df = df[["    DATE", "TC", "TF"]].to_dict('records')
     return result_df
 
-@app.route("/api/v1/<station>/<date>")
-def station_and_date(station, date):
+@app.route("/api/v1/<station>/<year>/<month>/<day>")
+def station_and_date(station, year, month, day):
     try:
+        date = year + "-" + month + "-" + day
         filepath = "data\TG_STAID" + str(station).zfill(6) + ".txt"
         df = pd.read_csv(filepath, skiprows=20, parse_dates=["    DATE"])
         temperature = df.loc[df["    DATE"] == date]["   TG"].squeeze() / 10
