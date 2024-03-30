@@ -23,11 +23,11 @@ def station_and_date(station, year, month, day):
             #Construct filepath variable with endpoint data
             filepath = "data\\TG_STAID" + str(station).zfill(6) + ".txt"
             
-            #Create data frame instance and get requiered row
+            #Create data frame instance and get required row
             df = pd.read_csv(filepath, skiprows=20, parse_dates=["    DATE"])
             day_df = df.loc[df["    DATE"] == date][["    DATE", "   TG"]]
             
-            #Add columns for celcius and fahrenheit temperatures
+            #Add columns for celsius and fahrenheit temperatures
             day_df["TR"] = day_df["   TG"].mask(df["   TG"] == -9999, nan)
             day_df["TC"] = day_df["TR"] / 10
             day_df["TF"] = round((day_df["TC"] * 9/5 + 32), 2)
@@ -54,12 +54,12 @@ def station_and_month(station, year, month):
             #Create data frame instance from filepath
             df = pd.read_csv(filepath, skiprows=20)
             
-            #Get requiered rows according to date
+            #Get required rows according to date
             df["    DATE"] = df["    DATE"].astype(str)
             year_df = df[df["    DATE"].str.startswith(date)]
             year_df["    DATE"] = pd.to_datetime(year_df["    DATE"])
             
-            #Add columns for celcius and fahrenheit temperatures
+            #Add columns for celsius and fahrenheit temperatures
             year_df["TR"] = year_df["   TG"].mask(df["   TG"] == -9999, nan)
             year_df["TC"] = year_df["TR"] / 10
             year_df["TF"] = round((year_df["TC"] * 9/5 + 32), 2)
@@ -83,13 +83,13 @@ def station_and_year(station, year):
             #Construct filepath variable with endpoint data
             filepath = "data\\TG_STAID" + str(station).zfill(6) + ".txt"
             
-            #Get requiered rows according to date
+            #Get required rows according to date
             df = pd.read_csv(filepath, skiprows=20)
             df["    DATE"] = df["    DATE"].astype(str)
             year_df = df[df["    DATE"].str.startswith(date)]
             year_df["    DATE"] = pd.to_datetime(year_df["    DATE"])
             
-            #Add columns for celcius and fahrenheit temperatures
+            #Add columns for celsius and fahrenheit temperatures
             year_df["TR"] = year_df["   TG"].mask(df["   TG"] == -9999, nan)
             year_df["TC"] = year_df["TR"] / 10
             year_df["TF"] = round((year_df["TC"] * 9/5 + 32), 2)
@@ -111,7 +111,7 @@ def only_station(station):
         #Create data frame instance from filepath
         df = pd.read_csv(filepath, skiprows=20, parse_dates=["    DATE"])
         
-        #Add columns for celcius and fahrenheit temperatures
+        #Add columns for celsius and fahrenheit temperatures
         df["TR"] = df["   TG"].mask(df["   TG"] == -9999, nan)
         df["TC"] = df["TR"] / 10
         df["TF"] = round((df["TC"] * 9/5 + 32), 2)
