@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 import pandas as pd
-from numpy import float64, nan
+from numpy import nan
 
 app = Flask(__name__)
 
