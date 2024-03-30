@@ -7,19 +7,22 @@
 </head>
 <body>
     <h1>Weather Data API</h1>
-    <h4>Get temperature from a specific date</h4>
+    <h3>Get temperature from a specific date</h3>
     <p>URL format: http://127.0.0.1:5000/api/v1/station/yyyy/mm/dd</p>
     <p>URL example: http://127.0.0.1:5000/api/v1/10/1997/08/24</p>
-    <h4>Get temperature from a month range</h4>
+    <h3>Get temperature from a month range</h3>
     <p>URL format: http://127.0.0.1:5000/api/v1/station/yyyy/mm</p>
     <p>URL example: http://127.0.0.1:5000/api/v1/10/1997/08</p>
-    <h4>Get temperature from a year range</h4>
+    <h3>Get temperature from a year range</h3>
     <p>URL format: http://127.0.0.1:5000/api/v1/station/yyyy</p>
-    <p>URL example: http://127.0.0.1:5000/api/v1/10/1997</p>
-    <h4>Get all temperature data</h4>
+    <p>URL example: http://127.0.0.1:5000/api/v1/10/1997
+    <p>In this case you can access data from decades, centuries, and millennia, providing less than 4 digits to the year argument.</p>
+    <p>i.e.: http://127.0.0.1:5000/api/v1/10/199 to get temperature data for the whole 90's decade.</p>
+    </p>
+    <h3>Get all temperature data</h3>
     <p>URL format: http://127.0.0.1:5000/api/v1/station</p>
     <p>URL example: http://127.0.0.1:5000/api/v1/10</p>
-    <h4>Stations ID</h4>
+    <h3>Stations ID</h3>
     <p>{{stations_id|safe}}</p>
 </body>
 </html>
