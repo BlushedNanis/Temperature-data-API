@@ -2,17 +2,22 @@ from flask import Flask, render_template
 import pandas as pd
 from numpy import nan
 
+
+# Create Flask instance
 app = Flask(__name__)
 
+# Load weather data into data frame
 stations = pd.read_csv("data\\stations.txt", skiprows=17)
 stations = stations[["STAID","STANAME                                 "]]
 
 
+# Set home route
 @app.route("/")
 def home():
     return render_template("home.html", stations_id=stations.to_html())
 
 
+# Set year-month-day api route
 @app.route("/api/v1/<station>/<year>/<month>/<day>")
 def station_and_date(station, year, month, day):
     try:
@@ -41,6 +46,7 @@ def station_and_date(station, year, month, day):
         return "Please, provide a valid station."
 
 
+# Set year-month api route
 @app.route("/api/v1/<station>/<year>/<month>")
 def station_and_month(station, year, month):
     try:
@@ -73,6 +79,7 @@ def station_and_month(station, year, month):
         return "Please, provide a valid station."
 
 
+#Set year only api route
 @app.route("/api/v1/<station>/<year>")
 def station_and_year(station, year):
     try:
@@ -102,6 +109,8 @@ def station_and_year(station, year):
     except FileNotFoundError:
         return "Please, provide a valid station."
 
+
+# Set station only api route
 @app.route("/api/v1/<station>")
 def only_station(station):
     try:
